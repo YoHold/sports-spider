@@ -1,0 +1,19 @@
+
+logging:
+  config: classpath:logback.xml
+
+user:
+  authString: xxxxx
+  authString2: xxxxx
+  imsi: xxxx
+  mobilePhone: xxxxx
+  userId: xxxxx
+  deviceId: xxxxx
+
+
+order:
+  openDate: 2022-03-10
+  sectionTime: 16:00 - 17:00
+
+ding-talk:
+  url: xxxxx

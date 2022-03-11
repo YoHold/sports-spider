@@ -10,6 +10,7 @@ import com.yochiu.spider.data.BallCourtSection;
 import com.yochiu.spider.data.BallCourt;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections.MapUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import java.util.List;
 import java.util.Map;
@@ -98,9 +99,12 @@ public class SportsApiClient {
         String dataBody = HttpUtil.get(QUERY_STORE_URL, null, 3000, 3000, params);
         log.info("querySite, openDate:{}, siteCode:{}, dataBody:{}", openDate, siteCode, dataBody);
 
+        if (StringUtils.isEmpty(dataBody)) {
+            return null;
+        }
+        JSONArray dataArray = JSONObject.parseArray(dataBody);
         Map<String, BallCourtSection> courtSectionMap = Maps.newHashMap();
         List<BallCourt> ballCourts = Lists.newArrayList();
-        JSONArray dataArray = JSONObject.parseArray(dataBody);
         for (int i = 0; i < dataArray.size(); i++) {
             JSONObject dataJson = dataArray.getJSONObject(i);
             JSONObject stadiumField = dataJson.getJSONObject("stadiumField");
